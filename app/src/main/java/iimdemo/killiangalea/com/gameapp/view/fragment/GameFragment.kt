@@ -16,7 +16,7 @@ import iimdemo.killiangalea.com.gameapp.R
 import iimdemo.killiangalea.com.gameapp.model.Game
 import kotlinx.android.synthetic.main.fragment_game.*
 
-class GameFragment(private val gameId: Int) : BackFragment() {
+class GameFragment(private val gameId: Int) : BackOpenFragment() {
 
     private var linkCallback: OpenLink? = null
 

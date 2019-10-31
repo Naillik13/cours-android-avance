@@ -3,7 +3,7 @@ package iimdemo.killiangalea.com.gameapp.view.fragment
 import android.content.Context
 import androidx.fragment.app.Fragment
 
-open class LoaderFragment : Fragment() {
+open class LoaderOpenFragment : Fragment() {
 
     open var loaderCallback: LoaderManager? = null
 

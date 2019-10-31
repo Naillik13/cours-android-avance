@@ -18,7 +18,7 @@ import iimdemo.killiangalea.com.gameapp.view.adapter.GameAdapter
 import kotlinx.android.synthetic.main.fragment_gamelist.*
 import org.json.JSONObject
 
-class GameListFragment : LoaderFragment() {
+class GameListFragment : LoaderOpenFragment() {
 
     private var gameList: ArrayList<GamePreview> = ArrayList()
     private var gameCallback : OnGameSelected? = null

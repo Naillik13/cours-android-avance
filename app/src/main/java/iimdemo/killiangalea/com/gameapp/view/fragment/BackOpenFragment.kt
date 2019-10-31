@@ -3,7 +3,7 @@ package iimdemo.killiangalea.com.gameapp.view.fragment
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 
-open class BackFragment : LoaderFragment() {
+open class BackOpenFragment : LoaderOpenFragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
