@@ -64,8 +64,12 @@ class GameListFragment : DialogFragment() {
     }
 
     private fun fetchGames() {
+
+
         // Instantiate the RequestQueue.
         val queue = Volley.newRequestQueue(this.context)
+
+        dialogCallback?.showDialog()
 
         //Reset game list
         gameList.clear()
@@ -90,6 +94,8 @@ class GameListFragment : DialogFragment() {
                 //Stop refreshing and update adapter
                 refreshLayout.isRefreshing = false
                 recyclerView.adapter?.notifyDataSetChanged()
+
+                dialogCallback?.dismissDialog()
             },
             Response.ErrorListener { error ->
                 Log.e("test", error.localizedMessage)
