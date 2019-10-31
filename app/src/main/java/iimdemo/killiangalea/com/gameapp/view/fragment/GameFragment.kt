@@ -20,8 +20,6 @@ class GameFragment(private val gameId: Int) : BackFragment() {
 
     private var linkCallback: OpenLink? = null
 
-    private var dialogCallback: DialogManager? = null
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,15 +37,10 @@ class GameFragment(private val gameId: Int) : BackFragment() {
         if (linkCallback == null)
             throw RuntimeException("OpenLink not implemented by activity")
 
-        dialogCallback = context as? DialogManager
-        if (dialogCallback == null)
-            throw RuntimeException("ManageDialog not implemented by activity")
-
     }
 
     override fun onDetach() {
         linkCallback = null
-        dialogCallback = null
         super.onDetach()
     }
 

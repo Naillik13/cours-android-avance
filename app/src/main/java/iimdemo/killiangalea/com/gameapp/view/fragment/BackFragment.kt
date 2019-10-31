@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 
-open class BackFragment : Fragment() {
+open class BackFragment : DialogFragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

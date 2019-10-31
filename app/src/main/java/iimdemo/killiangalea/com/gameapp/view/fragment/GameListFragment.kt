@@ -19,11 +19,10 @@ import iimdemo.killiangalea.com.gameapp.view.adapter.GameAdapter
 import kotlinx.android.synthetic.main.fragment_gamelist.*
 import org.json.JSONObject
 
-class GameListFragment : Fragment() {
+class GameListFragment : DialogFragment() {
 
     private var gameList: ArrayList<GamePreview> = ArrayList()
     private var gameCallback : OnGameSelected? = null
-    private var dialogCallback : DialogManager? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,14 +57,10 @@ class GameListFragment : Fragment() {
         if (gameCallback == null)
             throw RuntimeException("OnGameSelected not implemented by activity")
 
-        dialogCallback = context as? DialogManager
-        if (dialogCallback == null)
-            throw RuntimeException("ManageDialog not implemented by activity")
     }
 
     override fun onDetach() {
         gameCallback = null
-        dialogCallback = null
         super.onDetach()
     }
 
