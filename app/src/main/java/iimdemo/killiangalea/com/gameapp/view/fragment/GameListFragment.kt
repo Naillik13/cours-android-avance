@@ -22,7 +22,8 @@ import org.json.JSONObject
 class GameListFragment : Fragment() {
 
     private var gameList: ArrayList<GamePreview> = ArrayList()
-    private var callback : OnGameSelected? = null
+    private var gameCallback : OnGameSelected? = null
+    private var dialogCallback : DialogManager? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,19 +47,25 @@ class GameListFragment : Fragment() {
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = GameAdapter(gameList){ id: Int ->
-            callback?.onGameSelected(id)
+            dialogCallback?.showDialog()
+            gameCallback?.onGameSelected(id)
         }
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        callback = context as? OnGameSelected
-        if (callback == null)
+        gameCallback = context as? OnGameSelected
+        if (gameCallback == null)
             throw RuntimeException("OnGameSelected not implemented by activity")
+
+        dialogCallback = context as? DialogManager
+        if (dialogCallback == null)
+            throw RuntimeException("ManageDialog not implemented by activity")
     }
 
     override fun onDetach() {
-        callback = null
+        gameCallback = null
+        dialogCallback = null
         super.onDetach()
     }
 

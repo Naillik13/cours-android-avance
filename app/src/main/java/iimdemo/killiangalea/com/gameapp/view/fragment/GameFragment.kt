@@ -18,14 +18,15 @@ import kotlinx.android.synthetic.main.fragment_game.*
 
 class GameFragment(private val gameId: Int) : BackFragment() {
 
-    private var callback: OpenLink? = null
+    private var linkCallback: OpenLink? = null
+
+    private var dialogCallback: DialogManager? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_game, container, false)
         fetchGame()
@@ -34,13 +35,19 @@ class GameFragment(private val gameId: Int) : BackFragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        callback = context as? OpenLink
-        if (callback == null)
+        linkCallback = context as? OpenLink
+        if (linkCallback == null)
             throw RuntimeException("OpenLink not implemented by activity")
+
+        dialogCallback = context as? DialogManager
+        if (dialogCallback == null)
+            throw RuntimeException("ManageDialog not implemented by activity")
+
     }
 
     override fun onDetach() {
-        callback = null
+        linkCallback = null
+        dialogCallback = null
         super.onDetach()
     }
 
@@ -77,13 +84,13 @@ class GameFragment(private val gameId: Int) : BackFragment() {
         Picasso.get().load(game.imageUrl).into(image)
 
         button.setOnClickListener {
-            callback?.openLink(game.link)
+            linkCallback?.openLink(game.link)
         }
+        dialogCallback?.dismissDialog()
     }
 
     interface OpenLink {
         fun openLink(link: String)
     }
-
 
 }
