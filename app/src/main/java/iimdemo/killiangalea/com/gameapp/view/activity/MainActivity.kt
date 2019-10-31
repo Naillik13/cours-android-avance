@@ -9,12 +9,12 @@ import androidx.fragment.app.Fragment
 import iimdemo.killiangalea.com.gameapp.R
 import iimdemo.killiangalea.com.gameapp.util.SharedPreferencesUtil
 import iimdemo.killiangalea.com.gameapp.view.dialog.LoadingDialog
-import iimdemo.killiangalea.com.gameapp.view.fragment.DialogManager
+import iimdemo.killiangalea.com.gameapp.view.fragment.LoaderManager
 import iimdemo.killiangalea.com.gameapp.view.fragment.GameFragment
 import iimdemo.killiangalea.com.gameapp.view.fragment.GameListFragment
 
 class MainActivity : AppCompatActivity(), GameListFragment.OnGameSelected, GameFragment.OpenLink,
-    DialogManager {
+    LoaderManager {
 
     lateinit var loadingDialog: LoadingDialog
 

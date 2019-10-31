@@ -79,7 +79,7 @@ class GameFragment(private val gameId: Int) : BackFragment() {
         button.setOnClickListener {
             linkCallback?.openLink(game.link)
         }
-        dialogCallback?.dismissDialog()
+        loaderCallback?.dismissDialog()
     }
 
     interface OpenLink {

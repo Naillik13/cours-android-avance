@@ -1,6 +1,6 @@
 package iimdemo.killiangalea.com.gameapp.view.fragment
 
-interface DialogManager {
+interface LoaderManager {
     fun showDialog()
 
     fun dismissDialog()

@@ -3,21 +3,21 @@ package iimdemo.killiangalea.com.gameapp.view.fragment
 import android.content.Context
 import androidx.fragment.app.Fragment
 
-open class DialogFragment : Fragment() {
+open class LoaderFragment : Fragment() {
 
-    open var dialogCallback: DialogManager? = null
+    open var loaderCallback: LoaderManager? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        dialogCallback = context as? DialogManager
-        if (dialogCallback == null)
+        loaderCallback = context as? LoaderManager
+        if (loaderCallback == null)
             throw RuntimeException("ManageDialog not implemented by activity")
     }
 
     override fun onDetach() {
         super.onDetach()
-        dialogCallback = null
+        loaderCallback = null
 
     }
 

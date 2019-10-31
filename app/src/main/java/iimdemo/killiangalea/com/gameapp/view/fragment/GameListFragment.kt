@@ -18,7 +18,7 @@ import iimdemo.killiangalea.com.gameapp.view.adapter.GameAdapter
 import kotlinx.android.synthetic.main.fragment_gamelist.*
 import org.json.JSONObject
 
-class GameListFragment : DialogFragment() {
+class GameListFragment : LoaderFragment() {
 
     private var gameList: ArrayList<GamePreview> = ArrayList()
     private var gameCallback : OnGameSelected? = null
@@ -36,16 +36,16 @@ class GameListFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         refreshLayout.setOnRefreshListener {
-            fetchGames()
+            fetchGames(false)
         }
 
-        fetchGames()
+        fetchGames(true)
 
         val layoutManager = LinearLayoutManager(this.context)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = GameAdapter(gameList){ id: Int ->
-            dialogCallback?.showDialog()
+            loaderCallback?.showDialog()
             gameCallback?.onGameSelected(id)
         }
     }
@@ -63,13 +63,15 @@ class GameListFragment : DialogFragment() {
         super.onDetach()
     }
 
-    private fun fetchGames() {
+    private fun fetchGames(showLoader: Boolean) {
 
 
         // Instantiate the RequestQueue.
         val queue = Volley.newRequestQueue(this.context)
 
-        dialogCallback?.showDialog()
+        // Show loader
+        if (showLoader)
+            loaderCallback?.showDialog()
 
         //Reset game list
         gameList.clear()
@@ -92,10 +94,13 @@ class GameListFragment : DialogFragment() {
                 }
 
                 //Stop refreshing and update adapter
-                refreshLayout.isRefreshing = false
                 recyclerView.adapter?.notifyDataSetChanged()
 
-                dialogCallback?.dismissDialog()
+                // Dismiss loader
+                if (showLoader)
+                    loaderCallback?.dismissDialog()
+
+                refreshLayout.isRefreshing = false
             },
             Response.ErrorListener { error ->
                 Log.e("test", error.localizedMessage)
